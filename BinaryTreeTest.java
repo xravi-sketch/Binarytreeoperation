@@ -79,3 +79,100 @@ class BinaryTree {
             preorder(root.left);
             preorder(root.right);
         }
+    }
+
+    void postorder(Node root) {
+        if (root != null) {
+            postorder(root.left);
+            postorder(root.right);
+            System.out.print(root.data + " ");
+        }
+    }
+
+    boolean isEmpty() {
+        return root == null;
+    }
+}
+
+public class BinaryTreeTest {
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+        BinaryTree bt = new BinaryTree();
+
+        char ch;
+
+        do {
+
+            System.out.println("\nBinary Tree Test");
+            System.out.println("\nBinary Tree Operations");
+            System.out.println("1. Insert");
+            System.out.println("2. Delete");
+            System.out.println("3. Search");
+            System.out.println("4. Inorder");
+            System.out.println("5. Preorder");
+            System.out.println("6. Postorder");
+            System.out.println("7. Check Empty");
+
+            System.out.print("Enter Your Choice:: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.print("Enter integer element to insert :: ");
+                    bt.root = bt.insert(bt.root, sc.nextInt());
+                    System.out.println("Insertion Successful");
+                    break;
+
+                case 2:
+                    System.out.print("Enter element to delete :: ");
+                    bt.root = bt.delete(bt.root, sc.nextInt());
+                    System.out.println("Deletion Successful");
+                    break;
+
+                case 3:
+                    System.out.print("Enter element to search :: ");
+                    if (bt.search(bt.root, sc.nextInt()))
+                        System.out.println("Element Found");
+                    else
+                        System.out.println("Element Not Found");
+                    break;
+
+                case 4:
+                    System.out.print("Inorder : ");
+                    bt.inorder(bt.root);
+                    System.out.println();
+                    break;
+
+                case 5:
+                    System.out.print("Preorder : ");
+                    bt.preorder(bt.root);
+                    System.out.println();
+                    break;
+
+                case 6:
+                    System.out.print("Postorder : ");
+                    bt.postorder(bt.root);
+                    System.out.println();
+                    break;
+
+                case 7:
+                    if (bt.isEmpty())
+                        System.out.println("Tree is Empty");
+                    else
+                        System.out.println("Tree is Not Empty");
+                    break;
+
+                default:
+                    System.out.println("Wrong Entry");
+            }
+
+            System.out.print("\nDo you want to continue (Type y or n): ");
+            ch = sc.next().charAt(0);
+
+        } while (ch == 'y' || ch == 'Y');
+
+        sc.close();
+    }
+}
