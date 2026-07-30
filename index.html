@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Web Page</title>
+    <meta charset="UTF-8">
+    <title>Binary Tree Java Program</title>
 </head>
 <body>
 
-    <h1>Welcome to My Website</h1>
+    <h1>Binary Tree Operations in Java</h1>
 
-    <p>import java.util.Scanner;
+    <p><b>Program:</b></p>
+
+    <pre><code>
+import java.util.Scanner;
 
 class Node {
     int data;
@@ -35,6 +39,87 @@ class BinaryTree {
     }
 
     Node delete(Node root, int key) {
+        if (root == null)
+            return null;
+
+        if (key < root.data)
+            root.left = delete(root.left, key);
+        else if (key > root.data)
+            root.right = delete(root.right, key);
+        else {
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+
+            Node temp = minValue(root.right);
+            root.data = temp.data;
+            root.right = delete(root.right, temp.data);
+        }
+        return root;
+    }
+
+    Node minValue(Node root) {
+        while (root.left != null)
+            root = root.left;
+        return root;
+    }
+
+    boolean search(Node root, int key) {
+        if (root == null)
+            return false;
+
+        if (root.data == key)
+            return true;
+
+        if (key < root.data)
+            return search(root.left, key);
+
+        return search(root.right, key);
+    }
+
+    void inorder(Node root) {
+        if (root != null) {
+            inorder(root.left);
+            System.out.print(root.data + " ");
+            inorder(root.right);
+        }
+    }
+
+    void preorder(Node root) {
+        if (root != null) {
+            System.out.print(root.data + " ");
+            preorder(root.left);
+            preorder(root.right);
+        }
+    }
+
+    void postorder(Node root) {
+        if (root != null) {
+            postorder(root.left);
+            postorder(root.right);
+            System.out.print(root.data + " ");
+        }
+    }
+
+    boolean isEmpty() {
+        return root == null;
+    }
+}
+
+public class BinaryTreeTest {
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+        BinaryTree bt = new BinaryTree();
+
+        // Remaining code...
+    }
+}
+    </code></pre>
+
+</body>
+</html>    Node delete(Node root, int key) {
         if (root == null)
             return null;
 
